@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint check
+      glob: "*.{ts,tsx,js,jsx,json}"
+      run: bun lint {staged_files}
+    - name: i18n check
+      run: bun i18n:check
+    - name: tsc check
+      glob: '*.{ts,tsx}'
+      run: bun tsc --noEmit --skipLibCheck {staged_files}
