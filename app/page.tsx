@@ -1,3 +1,6 @@
-export default function Page() {
-  return <p>Main content</p>;
+import { redirect } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+
+export default function RootPage() {
+  redirect(`/${routing.defaultLocale}`);
 }

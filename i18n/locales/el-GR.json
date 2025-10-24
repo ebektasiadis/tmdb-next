@@ -1,0 +1,16 @@
+{
+  "NotFoundPage": {
+    "title": "Σφάλμα 404",
+    "description": "Η σελίδα δεν βρέθηκε"
+  },
+  "ThemeToggleButton": {
+    "themes": {
+      "dark": "Σκοτεινό θέμα",
+      "light": "Φωτεινό θέμα",
+      "system": "Θέμα συστήματος"
+    }
+  },
+  "Clock": {
+    "theTimeIs": "Η ώρα είναι {time, time, long}"
+  }
+}

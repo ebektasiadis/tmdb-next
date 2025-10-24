@@ -1,4 +1,4 @@
-import ThemeToggleButton from '@/app/components/NavigationBar/ThemeToggleButton';
+import ThemeToggleButton from '@/app/[locale]/components/NavigationBar/ThemeToggleButton';
 
 const NavigationBar = () => {
   return (
