@@ -26,6 +26,13 @@
         "noConsole": "warn",
         "noUnknownAtRules": "off"
       },
+      "correctness": {
+        "noUnusedImports": {
+          "fix": "safe",
+          "level": "info",
+          "options": {}
+        }
+      },
       "nursery": {
         "useSortedClasses": {
           "fix": "safe",
