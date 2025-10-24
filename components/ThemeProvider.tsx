@@ -3,7 +3,10 @@
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { ComponentProps } from 'react';
 
-function ThemeProvider({ children, ...props }: ComponentProps<typeof NextThemesProvider>) {
+function ThemeProvider({
+  children,
+  ...props
+}: ComponentProps<typeof NextThemesProvider>) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
 
