@@ -1,0 +1,16 @@
+{
+  "NotFoundPage": {
+    "title": "Error 404",
+    "description": "This page could not be found"
+  },
+  "ThemeToggleButton": {
+    "themes": {
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System"
+    }
+  },
+  "Clock": {
+    "theTimeIs": "The Time Is {time, time, long}"
+  }
+}
