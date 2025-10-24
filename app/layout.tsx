@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono, Merriweather } from 'next/font/google';
 import './globals.css';
+import NavigationBar from '@/app/components/NavigationBar/NavigationBar';
+import ThemeProvider from '@/components/ThemeProvider';
 
 const inter = Inter({
   variable: '--font-sans',
@@ -28,9 +30,19 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${merriweather.variable} ${jetBrainsMono.variable} antialiased`}>
-        {children}
+    <html suppressHydrationWarning lang="en">
+      <body
+        className={`${inter.variable} ${merriweather.variable} ${jetBrainsMono.variable} antialiased`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+          disableTransitionOnChange
+        >
+          <NavigationBar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

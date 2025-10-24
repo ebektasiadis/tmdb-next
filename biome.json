@@ -11,10 +11,7 @@
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 120
+    "useEditorconfig": true
   },
   "javascript": {
     "formatter": {
@@ -26,7 +23,22 @@
     "rules": {
       "recommended": true,
       "suspicious": {
+        "noConsole": "warn",
         "noUnknownAtRules": "off"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "info",
+          "options": {}
+        }
+      },
+      "style": {
+        "useConsistentCurlyBraces": {
+          "fix": "safe",
+          "level": "info",
+          "options": {}
+        }
       }
     },
     "domains": {
