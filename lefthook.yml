@@ -7,5 +7,9 @@ pre-commit:
     - name: i18n check
       run: bun i18n:check
     - name: tsc check
-      glob: '*.{ts,tsx}'
       run: bun tsc --noEmit --skipLibCheck
+
+commit-msg:
+  commands:
+    "conventional commit lint check":
+      run: npx commitlint --edit {1}
