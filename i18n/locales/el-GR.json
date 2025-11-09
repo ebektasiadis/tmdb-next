@@ -12,5 +12,9 @@
   },
   "Clock": {
     "theTimeIs": "Η ώρα είναι {time, time, long}"
+  },
+  "Homepage": {
+    "today": "Σήμερα",
+    "thisWeek": "Αυτή την εβδομάδα"
   }
 }

@@ -12,5 +12,9 @@
   },
   "Clock": {
     "theTimeIs": "The Time Is {time, time, long}"
+  },
+  "Homepage": {
+    "today": "Today",
+    "thisWeek": "This Week"
   }
 }

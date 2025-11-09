@@ -1,45 +1,59 @@
-import { getNowPlaying, getTopRated } from '@/app/api/tmdb/v3/movie/api';
+import { getTranslations } from 'next-intl/server';
 import SectionedMovieCardList from '@/components/SectionedMovieCardList/SectionedMovieCardList';
+import { getTrendingAll } from '../api/tmdb/v3/trending/api';
+import type { GetTrendingAllResponse } from '../api/tmdb/v3/trending/types';
 
 type LocalePageProps = Readonly<{
   params: Promise<{ locale: string }>;
 }>;
 
+const mapTrendingItemToMovieCard = (
+  trendingItem: GetTrendingAllResponse['results'][number],
+) => {
+  if (trendingItem.media_type === 'person') {
+    return null;
+  }
+
+  return {
+    id: trendingItem.id,
+    title:
+      trendingItem.media_type === 'movie'
+        ? trendingItem.title
+        : trendingItem.name,
+    posterPath: trendingItem.poster_path,
+    releaseDate:
+      trendingItem.media_type === 'movie'
+        ? trendingItem.release_date
+        : trendingItem.first_air_date,
+    voteAverage: trendingItem.vote_average,
+  };
+};
+
 export default async function LocalePage({ params }: LocalePageProps) {
   const { locale } = await params;
-  const [nowPlaying, topRated] = await Promise.all([
-    getNowPlaying({ language: locale, page: 1 }),
-    getTopRated({ language: locale, page: 1 }),
+  const t = await getTranslations('Homepage');
+  const [todayTrending, thisWeekTrending] = await Promise.all([
+    getTrendingAll({ language: locale, time_window: 'day' }),
+    getTrendingAll({ language: locale, time_window: 'week' }),
   ]);
 
-  return (
-    <SectionedMovieCardList
-      sections={[
-        {
-          title: 'Now Playing',
-          movieCardListProps: {
-            movies: nowPlaying.results.map((movie) => ({
-              id: movie.id,
-              title: movie.title,
-              posterPath: movie.poster_path,
-              releaseDate: movie.release_date,
-              voteAverage: movie.vote_average,
-            })),
-          },
-        },
-        {
-          title: 'Top Rated',
-          movieCardListProps: {
-            movies: topRated.results.map((movie) => ({
-              id: movie.id,
-              title: movie.title,
-              posterPath: movie.poster_path,
-              releaseDate: movie.release_date,
-              voteAverage: movie.vote_average,
-            })),
-          },
-        },
-      ]}
-    />
-  );
+  const todaySection = {
+    title: t('today'),
+    movieCardListProps: {
+      movies: todayTrending.results
+        .map(mapTrendingItemToMovieCard)
+        .filter((movieCard) => movieCard !== null),
+    },
+  };
+
+  const thisWeekSection = {
+    title: t('thisWeek'),
+    movieCardListProps: {
+      movies: thisWeekTrending.results
+        .map(mapTrendingItemToMovieCard)
+        .filter((movieCard) => movieCard !== null),
+    },
+  };
+
+  return <SectionedMovieCardList sections={[todaySection, thisWeekSection]} />;
 }
