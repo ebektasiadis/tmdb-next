@@ -1,5 +1,8 @@
-import { notFound } from 'next/navigation';
+type PageProps = Readonly<{
+  params: Promise<{ id: string }>;
+}>;
 
-export default async function Page() {
-  notFound();
+export default async function Page({ params }: PageProps) {
+  const { id } = await params;
+  return <div>Movie {id}</div>;
 }

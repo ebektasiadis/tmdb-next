@@ -1,4 +1,5 @@
 import { getNowPlaying, getTopRated } from '@/app/api/tmdb/v3/movie/api';
+import SectionedMovieCardList from '@/components/SectionedMovieCardList/SectionedMovieCardList';
 
 type LocalePageProps = Readonly<{
   params: Promise<{ locale: string }>;
@@ -12,19 +13,33 @@ export default async function LocalePage({ params }: LocalePageProps) {
   ]);
 
   return (
-    <div>
-      <h1 className="text-2xl">Now Playing Movies</h1>
-      <ul>
-        {nowPlaying.results.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-      <h1 className="mt-4 text-2xl">Top Rated Movies</h1>
-      <ul>
-        {topRated.results.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-    </div>
+    <SectionedMovieCardList
+      sections={[
+        {
+          title: 'Now Playing',
+          movieCardListProps: {
+            movies: nowPlaying.results.map((movie) => ({
+              id: movie.id,
+              title: movie.title,
+              posterPath: movie.poster_path,
+              releaseDate: movie.release_date,
+              voteAverage: movie.vote_average,
+            })),
+          },
+        },
+        {
+          title: 'Top Rated',
+          movieCardListProps: {
+            movies: topRated.results.map((movie) => ({
+              id: movie.id,
+              title: movie.title,
+              posterPath: movie.poster_path,
+              releaseDate: movie.release_date,
+              voteAverage: movie.vote_average,
+            })),
+          },
+        },
+      ]}
+    />
   );
 }
