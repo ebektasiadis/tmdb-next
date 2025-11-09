@@ -1,0 +1,6 @@
+[test]
+preload = ["./happydom.ts", "./test-global-mocks.tsx"]
+environment = "happy-dom"
+
+[test.env]
+NODE_ENV = "test"
